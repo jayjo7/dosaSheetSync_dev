@@ -49,6 +49,11 @@ app.put('/sheetSync', function(req, res)
 		var data= req.body[key];
 
 		console.log( "Number of records received = " + data.length);
+
+		for (var keyData in data)
+		{
+			console.log( "data [ " + keyData + " ] = " + data[keyData]);
+		}
 		
 
 		for (i=0; i<data.length; i++)
