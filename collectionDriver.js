@@ -26,13 +26,17 @@ CollectionDriver.prototype.findAll = function(collectionName, callback) {
 
 
 //find a specific object
-CollectionDriver.prototype.getOneByGivenCriteria = function(collectionName, searchKey,  serchvalue) { 
-  var  the_collection =  this.getCollection(collectionName)
-              console.log('collectionName = ' + the_collection);
+CollectionDriver.prototype.getOneByGivenCriteria = function(collectionName, searchKey,  serchvalue) 
+{ 
 
-            console.log('collectionName = ' + collectionName);
-            console.log('searchKey = ' + searchKey);
-            console.log('serchvalue = ' + serchvalue);
+        console.log('collectionName = ' + collectionName);
+        console.log('searchKey = ' + searchKey);
+        console.log('serchvalue = ' + serchvalue);
+
+          var  the_collection =  this.getCollection(collectionName)
+        console.log('collectionName = ' + the_collection);
+
+
             return the_collection.findOne({searchKey:serchvalue});
 
            // the_collection.findOne({searchKey:serchvalue}, function(error,doc) { 

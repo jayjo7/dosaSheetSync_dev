@@ -50,14 +50,17 @@ app.put('/sheetSync', function(req, res)
 
 		console.log( "Number of records received = " + data.length);
 
-		for (var keyData in data)
-		{
-			console.log( "data [ " + keyData + " ] = " + data[keyData]);
-		}
+
 		
 
 		for (i=0; i<data.length; i++)
 		{
+
+			for (var keyData in data[i])
+			{
+				console.log( "data [ " + i  +' ] [' + keyData + " ] = " + data[i][keyData]);
+			}
+
 			if(key ==='orders')
 			{
 				var order = collectionDriver.getOneByGivenCriteria(key, app.get('sheet_uniqueid_column_name'), data[i][app.get('sheet_uniqueid_column_name')]);
