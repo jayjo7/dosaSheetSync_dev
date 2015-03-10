@@ -33,11 +33,30 @@ CollectionDriver.prototype.getOneByGivenCriteria = function(collectionName, sear
         console.log('searchKey = ' + searchKey);
         console.log('serchvalue = ' + serchvalue);
 
-          var  the_collection =  this.getCollection(collectionName)
-        console.log('collectionName = ' + the_collection);
 
 
-            return the_collection.findOne({searchKey:serchvalue});
+    this.getCollection(collectionName, function(error, the_collection) {
+        if (error) 
+          {
+            console.log("getOneByGivenCriteria: " + error);
+            callback(error);
+          }
+        else {
+
+          console.log('collectionName = ' + the_collection);
+
+          return the_collection.findOne({searchKey:serchvalue});
+
+
+        }
+    });
+
+
+          //var  the_collection =  this.getCollection(collectionName)
+        //console.log('collectionName = ' + the_collection);
+
+
+            //return the_collection.findOne({searchKey:serchvalue});
 
            // the_collection.findOne({searchKey:serchvalue}, function(error,doc) { 
              //   if (error)
