@@ -26,7 +26,7 @@ CollectionDriver.prototype.findAll = function(collectionName, callback) {
 
 
 //find a specific object
-CollectionDriver.prototype.getOneByGivenCriteria = function(collectionName, searchKey,  serchvalue) 
+CollectionDriver.prototype.getOneByGivenCriteria = function(collectionName, searchKey,  serchvalue, callback) 
 { 
 
         console.log('collectionName = ' + collectionName);
@@ -45,39 +45,26 @@ CollectionDriver.prototype.getOneByGivenCriteria = function(collectionName, sear
 
           console.log('collectionName = ' + the_collection);
 
-          return the_collection.findOne({searchKey:serchvalue});
-
+          the_collection.findOne({searchKey:serchvalue},function(error,doc) { 
+              if (error) 
+              callback(error)
+              else callback(null, doc);
+            });
 
         }
     });
 
-
-          //var  the_collection =  this.getCollection(collectionName)
-        //console.log('collectionName = ' + the_collection);
-
-
-            //return the_collection.findOne({searchKey:serchvalue});
-
-           // the_collection.findOne({searchKey:serchvalue}, function(error,doc) { 
-             //   if (error)
-               // {
-             //       console.log('Trouble getting the data...');
-             //   } 
-              //  else 
-               //     {
-               //         return  doc;
-               //     }
-          //  });
-        
-    //});
 }
 
 
 //find a specific object
-CollectionDriver.prototype.get = function(collectionName, id, callback) { 
-    this.getCollection(collectionName, function(error, the_collection) {
+CollectionDriver.prototype.get = function(collectionName, id, callback) 
+{ 
+    this.getCollection(collectionName, function(error, the_collection) 
+    {
         if (error) callback(error)
-        else {
+        else 
+        {
             var checkForHexRegExp = new RegExp("^[0-9a-fA-F]{24}$"); 
             if (!checkForHexRegExp.test(id)) callback({error: "invalid id"});
             else the_collection.findOne({'_id':ObjectID(id)}, function(error,doc) { 
