@@ -61,6 +61,7 @@ app.put('/sheetSync', function(req, res)
 				console.log( "data [ " + i  +' ] [' + keyData + " ] = " + data[i][keyData]);
 			}
 
+			/** Revist this section of code when working on the ETA.
 			if(key ==='orders')
 			{
 				 collectionDriver.getOneByGivenCriteria(key, app.get('sheet_uniqueid_column_name'), data[i][app.get('sheet_uniqueid_column_name')], function(err, order){
@@ -84,7 +85,7 @@ app.put('/sheetSync', function(req, res)
 
 
 			}
-
+**/
 
 		   	collectionDriver.upsert(key, data[i], app.get('sheet_uniqueid_column_name') ,function(err,docs) 
 		   	{
