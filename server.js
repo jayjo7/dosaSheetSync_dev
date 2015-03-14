@@ -63,8 +63,15 @@ app.put('/sheetSync', function(req, res)
 
 			if(key ==='orders')
 			{
-				var order = collectionDriver.getOneByGivenCriteria(key, app.get('sheet_uniqueid_column_name'), data[i][app.get('sheet_uniqueid_column_name')]);
-				if(order)
+				 collectionDriver.getOneByGivenCriteria(key, app.get('sheet_uniqueid_column_name'), data[i][app.get('sheet_uniqueid_column_name')], function(err, order){
+				if(err)
+				{
+
+					console.log("Something wrong there is no orders object for given " + data[i][app.get('sheet_uniqueid_column_name')])
+					data[i].lastETAUpdateDateTime = new Date();
+
+				}
+				else
 				{
 					var previousETA= order.ETA;
 					var previousETAUpdateDateTime = order.lastETAUpdateDateTime;
@@ -72,12 +79,9 @@ app.put('/sheetSync', function(req, res)
 					console.log('previousETAUpdateDateTime = ' + previousETAUpdateDateTime);
 
 				}
-				else
-				{
-					console.log("Something wrong there is no orders object for given " + data[i][app.get('sheet_uniqueid_column_name')])
-					data[i].lastETAUpdateDateTime = new Date();
 
-				}
+				});
+
 
 			}
 
